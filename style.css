@@ -1,4 +1,4 @@
-/* ----- reset & base ----- */
+
 * {
     margin: 0;
     padding: 0;
@@ -18,7 +18,6 @@ html, body {
     overflow-x: hidden;
 }
 
-/* ----- animated background (full screen) ----- */
 body::before {
     content: '';
     position: fixed;
@@ -43,7 +42,6 @@ body::before {
     }
 }
 
-/* floating particles */
 body::after {
     content: '';
     position: fixed;
@@ -95,7 +93,6 @@ body::after {
     box-shadow: 0 50px 80px rgba(0, 0, 0, 0.9);
 }
 
-/* ----- header: foto + info ----- */
 .profile-header {
     display: flex;
     align-items: center;
@@ -106,9 +103,6 @@ body::after {
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
-/* ============================================
-   STYLING AVATAR / FOTO PROFIL
-   ============================================ */
 .avatar {
     flex-shrink: 0;
     width: 110px;
@@ -123,16 +117,16 @@ body::after {
     box-shadow: 0 14px 24px -6px rgba(0, 0, 0, 0.7);
     border: 2px solid rgba(255, 255, 255, 0.06);
     transition: 0.2s;
-    overflow: hidden; /* penting agar gambar bulat */
+    overflow: hidden;
     position: relative;
 }
 
-/* style untuk icon di dalam avatar */
+
 .avatar i {
     filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
 }
 
-/* style untuk gambar di dalam avatar */
+
 .avatar img {
     width: 100%;
     height: 100%;
@@ -192,7 +186,6 @@ body::after {
     font-size: 0.9rem;
 }
 
-/* social links */
 .social-row {
     display: flex;
     gap: 1.5rem;
