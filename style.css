@@ -1,0 +1,400 @@
+/* ----- reset & base ----- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', 'Segoe UI', Roboto, system-ui, -apple-system, sans-serif;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100vh;
+    background: #0b1120;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1.5rem;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* ----- animated background (full screen) ----- */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    background: radial-gradient(circle at 25% 20%, #1a2a4a, #080d17 80%);
+    animation: bgShift 22s ease-in-out infinite alternate;
+}
+
+@keyframes bgShift {
+    0% {
+        background: radial-gradient(circle at 25% 20%, #1a2a4a, #080d17 80%);
+        transform: scale(1) rotate(0deg);
+    }
+    50% {
+        background: radial-gradient(circle at 75% 70%, #1e3b5a, #0a1220 85%);
+        transform: scale(1.04) rotate(0.8deg);
+    }
+    100% {
+        background: radial-gradient(circle at 45% 55%, #142b44, #060b14 75%);
+        transform: scale(0.97) rotate(-0.8deg);
+    }
+}
+
+/* floating particles */
+body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    background-image:
+        radial-gradient(2.5px 2.5px at 8% 15%, rgba(255,255,255,0.12), transparent),
+        radial-gradient(2px 2px at 25% 65%, rgba(255,255,255,0.08), transparent),
+        radial-gradient(3px 3px at 55% 35%, rgba(255,255,255,0.06), transparent),
+        radial-gradient(2px 2px at 78% 10%, rgba(255,255,255,0.10), transparent),
+        radial-gradient(3px 3px at 92% 80%, rgba(255,255,255,0.05), transparent),
+        radial-gradient(2px 2px at 12% 88%, rgba(255,255,255,0.09), transparent),
+        radial-gradient(2.5px 2.5px at 68% 45%, rgba(255,255,255,0.07), transparent);
+    background-size: 280px 280px;
+    animation: floatParticles 35s linear infinite;
+}
+
+@keyframes floatParticles {
+    0% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+    25% { transform: translate(25px, -18px) scale(1.08); opacity: 0.9; }
+    50% { transform: translate(-15px, 12px) scale(0.92); opacity: 0.6; }
+    75% { transform: translate(20px, 8px) scale(1.05); opacity: 0.8; }
+    100% { transform: translate(-8px, -12px) scale(1); opacity: 0.5; }
+}
+
+/* ----- main card (full-screen friendly) ----- */
+.profile-card {
+    position: relative;
+    z-index: 10;
+    background: rgba(16, 26, 46, 0.78);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-radius: 3rem;
+    padding: 2.8rem 3.2rem;
+    max-width: 760px;
+    width: 100%;
+    box-shadow:
+        0 40px 70px rgba(0, 0, 0, 0.8),
+        0 0 0 1px rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    color: #f0f6ff;
+    margin: 0 auto;
+}
+
+.profile-card:hover {
+    transform: scale(1.008);
+    box-shadow: 0 50px 80px rgba(0, 0, 0, 0.9);
+}
+
+/* ----- header: foto + info ----- */
+.profile-header {
+    display: flex;
+    align-items: center;
+    gap: 1.8rem;
+    flex-wrap: wrap;
+    margin-bottom: 2.2rem;
+    padding-bottom: 1.8rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* ============================================
+   STYLING AVATAR / FOTO PROFIL
+   ============================================ */
+.avatar {
+    flex-shrink: 0;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    background: linear-gradient(145deg, #2d4370, #101f3a);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3.8rem;
+    color: #b8ccff;
+    box-shadow: 0 14px 24px -6px rgba(0, 0, 0, 0.7);
+    border: 2px solid rgba(255, 255, 255, 0.06);
+    transition: 0.2s;
+    overflow: hidden; /* penting agar gambar bulat */
+    position: relative;
+}
+
+/* style untuk icon di dalam avatar */
+.avatar i {
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+}
+
+/* style untuk gambar di dalam avatar */
+.avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* memastikan gambar proporsional dan mengisi penuh */
+    border-radius: 50%;
+    display: block;
+}
+
+/* style untuk inisial / teks di avatar */
+.avatar .initial {
+    font-size: 2.8rem;
+    font-weight: 600;
+    color: #b8ccff;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+}
+
+/* hover effect untuk avatar */
+.avatar:hover {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 16px 30px -8px rgba(0, 0, 0, 0.8);
+}
+
+.name-section {
+    flex: 1;
+    min-width: 180px;
+}
+
+.name-section h1 {
+    font-size: 2.2rem;
+    font-weight: 600;
+    letter-spacing: -0.3px;
+    background: linear-gradient(to right, #ffffff, #b8d0ff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 0.3rem;
+    line-height: 1.2;
+}
+
+.email-row {
+    font-size: 0.95rem;
+    color: #9bb1e0;
+    background: rgba(255, 255, 255, 0.04);
+    padding: 0.2rem 1.2rem 0.2rem 0.8rem;
+    border-radius: 40px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(4px);
+    margin-top: 0.2rem;
+}
+
+.email-row i {
+    color: #7f9fe0;
+    font-size: 0.9rem;
+}
+
+/* social links */
+.social-row {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 0.9rem;
+}
+
+.social-row a {
+    color: #b0c9ff;
+    text-decoration: none;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.35rem 1.4rem 0.35rem 1rem;
+    border-radius: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    transition: all 0.2s ease;
+    letter-spacing: 0.2px;
+    backdrop-filter: blur(4px);
+}
+
+.social-row a i {
+    font-size: 1.2rem;
+    width: 1.8rem;
+    text-align: center;
+}
+
+.social-row a .fa-facebook { color: #4b7bec; }
+.social-row a .fa-instagram { color: #e84393; }
+
+.social-row a:hover {
+    background: rgba(255, 255, 255, 0.08);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.15);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px -8px rgba(0, 0, 0, 0.5);
+}
+
+/* ----- 3 kolom deskripsi (full width) ----- */
+.desc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.4rem;
+    margin-top: 0.8rem;
+}
+
+.desc-item {
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 2rem;
+    padding: 1.6rem 0.8rem;
+    text-align: center;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    backdrop-filter: blur(4px);
+    transition: all 0.2s ease;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    min-height: 110px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.desc-item:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.08);
+    transform: translateY(-6px);
+}
+
+.desc-item .label {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1.8px;
+    color: #8ea6dd;
+    margin-bottom: 0.6rem;
+    font-weight: 500;
+    display: block;
+}
+
+.desc-item .label i {
+    margin-right: 6px;
+    font-size: 0.9rem;
+    color: #7f9fe0;
+}
+
+.desc-item .value {
+    font-size: 1rem;
+    font-weight: 400;
+    color: #d6e3ff;
+    line-height: 1.5;
+    min-height: 2.6rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 0.2rem;
+    word-break: break-word;
+}
+
+/* placeholder kosong (akan diisi user) */
+.desc-item .value:empty::before {
+    content: "—";
+    opacity: 0.2;
+    font-weight: 300;
+    letter-spacing: 2px;
+}
+
+.desc-item .value:not(:empty)::before {
+    content: none;
+}
+
+/* ----- responsive : full screen di segala ukuran ----- */
+@media (max-width: 700px) {
+    .profile-card {
+        padding: 2rem 1.5rem;
+        border-radius: 2.2rem;
+    }
+    .profile-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    .avatar {
+        width: 90px;
+        height: 90px;
+        font-size: 3rem;
+    }
+    .avatar .initial {
+        font-size: 2.2rem;
+    }
+    .name-section h1 {
+        font-size: 1.8rem;
+    }
+    .social-row {
+        gap: 0.8rem;
+    }
+    .social-row a {
+        padding: 0.25rem 1rem 0.25rem 0.7rem;
+        font-size: 0.9rem;
+    }
+    .social-row a i {
+        font-size: 1rem;
+        width: 1.4rem;
+    }
+    .desc-grid {
+        grid-template-columns: 1fr;
+        gap: 0.9rem;
+    }
+    .desc-item {
+        padding: 1.2rem 0.6rem;
+        min-height: 80px;
+    }
+}
+
+@media (max-width: 460px) {
+    body {
+        padding: 0.8rem;
+    }
+    .profile-card {
+        padding: 1.2rem 1rem;
+        border-radius: 1.8rem;
+    }
+    .avatar {
+        width: 70px;
+        height: 70px;
+        font-size: 2.4rem;
+    }
+    .avatar .initial {
+        font-size: 1.8rem;
+    }
+    .name-section h1 {
+        font-size: 1.5rem;
+    }
+    .email-row {
+        font-size: 0.8rem;
+        padding: 0.1rem 0.8rem 0.1rem 0.5rem;
+    }
+    .social-row a {
+        font-size: 0.8rem;
+        padding: 0.15rem 0.7rem 0.15rem 0.4rem;
+    }
+    .social-row a i {
+        font-size: 0.9rem;
+        width: 1.2rem;
+    }
+    .desc-item .label {
+        font-size: 0.7rem;
+        letter-spacing: 1.2px;
+    }
+    .desc-item .value {
+        font-size: 0.9rem;
+        min-height: 2rem;
+    }
+}
+
+/* tambahan: full screen aman di semua viewport */
+@media (min-height: 900px) {
+    .profile-card {
+        padding: 3.5rem 4rem;
+    }
+}
+
+/* kecil tambahan: elemen kosong tetap rapi */
+.desc-item .value:empty {
+    min-height: 2.2rem;
+}
